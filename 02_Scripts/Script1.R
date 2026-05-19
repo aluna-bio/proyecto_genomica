@@ -33,3 +33,14 @@ datos_t <- t(datos_filtrados)
 # Esto fortalece la correlación fuerte y debilita la correlación débil o negativa, haciendo que el valor de correlación sea más consistente conRed sin escalaLas características son biológicamente más significativas. 
 #Esta función busca el mejor power:
 pst <- pickSoftThreshold(datos_t, powerVector = (1:20), networkType = "unsigned") 
+
+#Plot 1
+plot(
+  pst$fitIndices[,1],
+  -sign(pst$fitIndices[,3]) * pst$fitIndices[,2],
+  type = "b",
+  xlab = "Power",
+  ylab = " R^2",
+  main = "Ajuste de Topología",
+)
+abline(h = 0.8, col = "red")
