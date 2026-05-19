@@ -51,7 +51,7 @@ plot(
   pst$fitIndices[, 1],
   pst$fitIndices[, 5],
   type = "b",
-  xlab = "Soft Threshold (Power)",
+  xlab = "Umbral (Power)",
   ylab = "Mean Connectivity",
   main = "Conectividad Media",
   col = "darkgreen", pch = 19)
