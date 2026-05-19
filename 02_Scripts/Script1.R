@@ -44,3 +44,18 @@ plot(
   main = "Ajuste de Topología",
 )
 abline(h = 0.8, col = "red")
+
+
+# Plot 2
+plot(
+  pst$fitIndices[, 1],
+  pst$fitIndices[, 5],
+  type = "b",
+  xlab = "Soft Threshold (Power)",
+  ylab = "Mean Connectivity",
+  main = "Conectividad Media",
+  col = "darkgreen", pch = 19)
+
+
+
+
