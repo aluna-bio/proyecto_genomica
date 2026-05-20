@@ -1,0 +1,33 @@
+---
+title: "README"
+output: html_document
+date: "2026-05-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Red de coexpresión de genes involucrados en cancer de mama.
+
+En este repositorio se describe el código con el cual se obtuvo una red de coexpresión de genes involucrados en el cáncer de mama.
+
+Para agilizar el proceso se filtraron previamente los datos y se alojaron en un objeto RDS.
+
+Sin embargo, se alojó la base de datos en un drive. A continuación se dejará la liga:
+
+```{r dataframe, eval=FALSE}
+ download.file(url = "https://drive.google.com/file/d/1U9u0J4eTZ_lBelsVudJfsE1uKuYF0bk1/view?usp=drive_link", destfile = "datos")
+
+
+```
+
+## Paquetes Requeridos
+
+Para poder reproducir el proyecto es necesaria la descarga de los siguientes paquetes:
+
+```{r paquetes, eval=FALSE}
+install.packages("BiocManager")
+install.packages("igraph")
+BiocManager::install("WGCNA", force = TRUE)
+```
