@@ -1,7 +1,6 @@
 ---
 title: "README"
 output: html_document
-date: "2026-05-20"
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +13,7 @@ En este repositorio se describe el código con el cual se obtuvo una red de coex
 
 Para agilizar el proceso se filtraron previamente los datos y se alojaron en un objeto RDS.
 
-A continuación, se anexa el link a la base de datos en un drive. 
+A continuación, se anexa el link a la base de datos en un drive.
 
 ```{r dataframe, eval=FALSE}
  download.file(url = "https://drive.google.com/file/d/1U9u0J4eTZ_lBelsVudJfsE1uKuYF0bk1/view?usp=drive_link", destfile = "datos")
