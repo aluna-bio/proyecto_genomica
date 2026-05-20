@@ -49,7 +49,7 @@ pst <- pickSoftThreshold(datos_t, powerVector = (1:20), networkType = "unsigned"
 png(filename = "03_Results/01_Ajuste_Topologia.png",width = 800, height = 600, res = 120)
 plot(
   pst$fitIndices[,1],
-  -sign(pst$fitIndices[,3]) * pst$fitIndices[,2],
+  -sign(pst$fitIndices[,3]) * pst$fitIndices[,2], #ayuda a calcular el R2
   type = "b",
   xlab = "Power",
   ylab = "Scale Free Topology Model Fit R^2",
@@ -79,6 +79,10 @@ dev.off()
 power <- pst$powerEstimate
 power
 
-# Se selecciona el power 4 por que..
+# Se selecciona el power 4 porque es el que dadas las dos pruebas para la verificación del uso del power cumplió los requerimientos.
 
+# Calcular la matriz de adyacencia 
+# Esta permite calcular la correlación a partir de datos de expresión, se le agrega el power seleccionado para elevar los datos
+# Dado que no es una red de interacción se especifica que es sin signo. 
+adjacency <- adjacency(datos_t, power = 4, type = "unsigned")
 
