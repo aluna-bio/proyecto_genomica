@@ -53,9 +53,10 @@ plot(
   xlab = "Power",
   ylab = "Scale Free Topology Model Fit R^2",
   main = "Ajuste de Topología",
-  col="blue3", pch= 16
+  col="blue3", pch= 16,
+  abline(h = 0.8, col = "red")
+  
 )
-abline(h = 0.8, col = "red")
 # El primer punto en pasar la línea en R^2 =0.8 fue el Power = 4.
 dev.off()
 
