@@ -1,46 +1,84 @@
 ---
 title: "Análisis de Redes de Coexpresión Génica mediante WGCNA para la Identificación de Reguladores Potenciales en Cáncer de Mama"
 output: html_document
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
-# Introducción 
+# Introducción
 
-El cáncer de mama es el más común, es la segunda causa principal de muerte relacionada con el cáncer entre las mujeres de todo el mundo (Tian et al., 2020). De las pacientes en fase temprana, entre el 20% y el 30% de los casos acaban desarrollándose hacia cáncer de mama avanzado (ABC). Aunque actualmente es difícil curar el ABC, podemos aliviar los síntomas clínicos de los pacientes, mejorar su calidad de vida y prolongar aún más su tiempo de supervivencia aplicando nuevos fármacos terapéuticos y optimizando los modelos de tratamiento para lograr el propósito de supervivencia a largo plazo con tumores (Breast Cancer Expert Committee of the National Quality Control Center for Cancer et al., 2025). 
+El cáncer de mama es el más común, es la segunda causa principal de muerte relacionada con el cáncer entre las mujeres de todo el mundo (Tian et al., 2020).
+De las pacientes en fase temprana, entre el 20% y el 30% de los casos acaban desarrollándose hacia cáncer de mama avanzado (ABC).
+Aunque actualmente es difícil curar el ABC, podemos aliviar los síntomas clínicos de los pacientes, mejorar su calidad de vida y prolongar aún más su tiempo de supervivencia aplicando nuevos fármacos terapéuticos y optimizando los modelos de tratamiento para lograr el propósito de supervivencia a largo plazo con tumores (Breast Cancer Expert Committee of the National Quality Control Center for Cancer et al., 2025).
 
-Desde este punto de vista es indispensable expandir nuestro conocimiento respecto al proceso de carcinogénesis en tejido mamario, buscando comprender todos los aspectos y mecanismos moleculares involucrados en su desarrollo. Esto nos proporciona una nueva perspectiva sobre la enfermedad y revelará nuevas dianas para desarrollar dichas estrategias, fármacos y  tratamientos. Como sabemos el cáncer es un proceso patológico caracterizado por células que se multiplican ilimitadamente, pierden su capacidad para entrar en apoptosis, desplazan a las células normales y forman masas de tejido llamadas tumores o neoplasias, causando alteraciones severas en el área del cuerpo donde se desarrolla; además, a la largo plazo, tienen la capacidad de diseminarse e invadir otras partes del organismo mediante metástasis (American Cancer Society, s. f.; National Cancer Institute, s. f.) 
+Desde este punto de vista es indispensable expandir nuestro conocimiento respecto al proceso de carcinogénesis en tejido mamario, buscando comprender todos los aspectos y mecanismos moleculares involucrados en su desarrollo.
+Esto nos proporciona una nueva perspectiva sobre la enfermedad y revelará nuevas dianas para desarrollar dichas estrategias, fármacos y tratamientos.
+Como sabemos el cáncer es un proceso patológico caracterizado por células que se multiplican ilimitadamente, pierden su capacidad para entrar en apoptosis, desplazan a las células normales y forman masas de tejido llamadas tumores o neoplasias, causando alteraciones severas en el área del cuerpo donde se desarrolla; además, a la largo plazo, tienen la capacidad de diseminarse e invadir otras partes del organismo mediante metástasis (American Cancer Society, s. f.; National Cancer Institute, s. f.)
 
-Es por esto que en el presente trabajo se realizará una red de co expresión a partir de muestras de pacientes con cáncer de mama, buscando correlaciones entre sus perfiles de expresión génica y determinando cuáles de ellos comparten funciones celulares similares. Dado que el cáncer es una enfermedad altamente heterogénea, este enfoque nos permite identificar aquellos genes que participan en el proceso de carcinogénesis con mayor relevancia y conectividad entre las muestras analizadas ofreciendo una visión global.
+Es por esto que en el presente trabajo se realizará una red de co expresión a partir de muestras de pacientes con cáncer de mama, buscando correlaciones entre sus perfiles de expresión génica y determinando cuáles de ellos comparten funciones celulares similares.
+Dado que el cáncer es una enfermedad altamente heterogénea, este enfoque nos permite identificar aquellos genes que participan en el proceso de carcinogénesis con mayor relevancia y conectividad entre las muestras analizadas ofreciendo una visión global.
 
-# Objetivo 
-Realizar una red de co-expresión de genes asociados a cáncer de mama utilizando un enfoque de biología de sistemas, con el fin de identificar módulos funcionales y genes altamente conectados (hubs) que operan como reguladores potenciales en la enfermedad 
+# Objetivo
+
+Realizar una red de co-expresión de genes asociados a cáncer de mama utilizando un enfoque de biología de sistemas, con el fin de identificar módulos funcionales y genes altamente conectados (hubs) que operan como reguladores potenciales en la enfermedad
 
 # Metodología
-**1.Obtención y filtrado de datos.**
-Se tomó como base la matriz de expresión génica de cáncer de mama correspondiente al estudio: “Identification of Important Modules and Biomarkers in Breast Cancer Based on WGCNA” (GSE25066). Se eliminaron los metadatos clínicos y se conservaron únicamente los valores numéricos de expresión.
 
-**2.Selección por varianza.**
-Con el fin  de enfocarse en los genes con mayor relevancia biológica, se calculó la varianza fila por fila en la matriz. Se ordenaron los datos de mayor a menor variabilidad y se seleccionaron los 5,000 más variables. Posteriormente, la matriz se traspuso para situar las muestras en las filas y los genes en las columnas.
+**1.Obtención y filtrado de datos.** Se tomó como base la matriz de expresión génica de cáncer de mama correspondiente al estudio: “Identification of Important Modules and Biomarkers in Breast Cancer Based on WGCNA” (GSE25066).
+Se eliminaron los metadatos clínicos y se conservaron únicamente los valores numéricos de expresión.
 
-**3.Análisis de umbral de topología.**
-Mediante la función pickSoftThreshold() se probaron potencias exponenciales en un rango de 1 a 20 bajo un modelo de red no dirigida. Se evaluó el índice de ajuste del modelo de topología free-scale (R^2) y la conectividad media para determinar el power óptimo
+**2.Selección por varianza.** Con el fin de enfocarse en los genes con mayor relevancia biológica, se calculó la varianza fila por fila en la matriz.
+Se ordenaron los datos de mayor a menor variabilidad y se seleccionaron los 5,000 más variables.
+Posteriormente, la matriz se traspuso para situar las muestras en las filas y los genes en las columnas.
 
-**4.Construcción matriz de adyacencia y TOM.**
-Se calculó la matriz de adyacencia elevando las correlaciones de pearson a la potencia 4. Para mitigar el ruido biológico y los falsos positivos. La matriz de adyacencia se transformó en una matriz de solapamiento topológico, la cual mide la similitud entre genes basándose en la cantidad de vecinos compartidos.
+**3.Análisis de umbral de topología.** Mediante la función pickSoftThreshold() se probaron potencias exponenciales en un rango de 1 a 20 bajo un modelo de red no dirigida.
+Se evaluó el índice de ajuste del modelo de topología free-scale (R\^2) y la conectividad media para determinar el power óptimo
 
-**5.Modelado y detección de comunidades en grafos.**
-Se removió la auto-correlación en la diagonal y se aplicó un filtro estricto de peso mínimo (> 0.05) para limpiar el ruido de fondo, la matriz se transformó en un objeto de red ponderado no dirigido. Se empleó el algoritmo de Louvain (cluster_louvain) para agrupar los genes coexpresados en módulos o comunidades.
+**4.Construcción matriz de adyacencia y TOM.** Se calculó la matriz de adyacencia elevando las correlaciones de pearson a la potencia 4.
+Para mitigar el ruido biológico y los falsos positivos.
+La matriz de adyacencia se transformó en una matriz de solapamiento topológico, la cual mide la similitud entre genes basándose en la cantidad de vecinos compartidos.
 
-**6.Aislamiento y visualización de Hubs.**
-Se calculó el degree de cada nodo de la red completa. Se extrajeron los 150 genes con mayor número de conexiones y se graficó su sub-red empleando el algoritmo de distribución de fuerzas de Fruchterman-Reingold.
+**5.Modelado y detección de comunidades en grafos.** Se removió la auto-correlación en la diagonal y se aplicó un filtro estricto de peso mínimo (\> 0.05) para limpiar el ruido de fondo, la matriz se transformó en un objeto de red ponderado no dirigido.
+Se empleó el algoritmo de Louvain (cluster_louvain) para agrupar los genes coexpresados en módulos o comunidades.
+
+**6.Aislamiento y visualización de Hubs.** Se calculó el degree de cada nodo de la red completa.
+Se extrajeron los 150 genes con mayor número de conexiones y se graficó su sub-red empleando el algoritmo de distribución de fuerzas de Fruchterman-Reingold.
 
 # Resultados
+
+![Gráfica 1. Scale Free Topology. Esta gráfica muestra qué tan bien se adapta la red al modelo biológico ideal a medida que se aumenta la potencia (Power). El umbral mínimo aceptable (R\^2 = 0.8). Se seleccionó el Power = 4 porque es el primer valor que supera este límite.](images/01_Ajuste_Topologia.png){width="333"}
+
+![Gráfica 2. Conectividad media. Esta gráfica se utilizó para confirmar que la potencia seleccionada no dejara a la red sin conexiones. Al aumentar el Power, el número de conexiones disminuye drásticamente. El Power = 4 se mantiene justo por encima de cero, lo que asegura que los genes tengan interacciones suficientes , ya que si los valores están por debajo del cero, significa que ya no tienen conexiones](images/02_Conectividad_Media.png){width="333"}
+
+![Gráfico 3. Red de coexpresión basada en matriz TOM.](images/03_Red.png){width="333"}
+
 # Discusión
-# Referencias bibliograficas
-Tian, Z., He, W., Tang, J., Liao, X., Yang, Q., Wu, Y., y Wu, G. (2020). Identification of important modules and biomarkers in breast cancer based on WGCNA. OncoTargets and Therapy, 13, 6805–6817. https://doi.org/10.2147/OTT.S258439
 
-Breast Cancer Expert Committee of the National Quality Control Center for Cancer, Breast Cancer Expert Committee of the China Anti‐Cancer Association, & Cancer Drug Clinical Research Committee of the China Anti‐Cancer Association. (2025). Guidelines for the diagnosis and treatment of advanced breast cancer in China (2024 edition). Cancer Innovation, 4(6), e70032. https://doi.org/10.1002/cai2.70032 
+Para la construcción de nuestra red de co expresión se consideraron los 20 powers disponibles y mediante el análisis de 2 gráficas: Scale Free Topology y Mean Conectivity se consideró que el power que permitía la mejor interpretación era el power 4, dados los parámetros que se mencionaron en el gráfico 1 y el gráfico 2. 
 
-American Cancer Society. (s. f. [a]). ¿Qué es el cáncer? Recuperado de https://www.cancer.org/es/ cancer/aspectos-basicos-sobre-el-cancer/que-es-el-cancer.html 
+La estructura de la red nos habla de que existen 3 clusters principales, dentro de dos de estos si existe una coexpresión observada, mientras que existe otro cluster que no se observa esta coexpresión, esto nos puede hablar de expresión tardía y expresión temprana de genes, en donde los clusters que si presentan dicha coexpresión se expresan en diferentes momentos que los genes presentes en el cluster que no presenta coexpresión.
 
-National Cancer Institute. (s. f.). What is cancer? Recuperado de https://www.cancer.gov/ about-cancer/understanding/what-is-cancer 
+# Referencias 
 
+-Tian, Z., He, W., Tang, J., Liao, X., Yang, Q., Wu, Y., y Wu, G.
+(2020).
+Identification of important modules and biomarkers in breast cancer based on WGCNA.
+OncoTargets and Therapy, 13, 6805–6817.
+<https://doi.org/10.2147/OTT.S258439>
+
+-Breast Cancer Expert Committee of the National Quality Control Center for Cancer, Breast Cancer Expert Committee of the China Anti‐Cancer Association, & Cancer Drug Clinical Research Committee of the China Anti‐Cancer Association.
+(2025).
+Guidelines for the diagnosis and treatment of advanced breast cancer in China (2024 edition).
+Cancer Innovation, 4(6), e70032.
+<https://doi.org/10.1002/cai2.70032>
+
+-American Cancer Society.
+(s. f. [a]).
+¿Qué es el cáncer?
+Recuperado de <https://www.cancer.org/es/> cancer/aspectos-basicos-sobre-el-cancer/que-es-el-cancer.html
+
+-National Cancer Institute.
+(s. f.).
+What is cancer?
+Recuperado de <https://www.cancer.gov/> about-cancer/understanding/what-is-cancer
