@@ -55,9 +55,12 @@ Se extrajeron los 150 genes con mayor número de conexiones y se graficó su sub
 
 # Discusión
 
-Para la construcción de nuestra red de co expresión se consideraron los 20 powers disponibles y mediante el análisis de 2 gráficas: Scale Free Topology y Mean Conectivity se consideró que el power que permitía la mejor interpretación era el power 4, dados los parámetros que se mencionaron en el gráfico 1 y el gráfico 2. 
+Para la construcción de nuestra red de co expresión se consideraron los 20 powers disponibles y mediante el análisis de 2 gráficas: Scale Free Topology y Mean Conectivity se consideró que el power que permitía la mejor interpretación era el power 4, dados los parámetros que se mencionaron en el gráfico 1 y el gráfico 2. 
 
-La estructura de la red nos habla de que existen 3 clusters principales, dentro de dos de estos si existe una coexpresión observada, mientras que existe otro cluster que no se observa esta coexpresión, esto nos puede hablar de expresión tardía y expresión temprana de genes, en donde los clusters que si presentan dicha coexpresión se expresan en diferentes momentos que los genes presentes en el cluster que no presenta coexpresión.
+La estructura de la red nos habla de que existen 3 clusters principales que ofrecen una perspectiva fascinante sobre la regulación transcripcional en el cáncer de mama, dentro de dos de estos si existe una coexpresión observada, mientras que existe otro cluster aislado que no se observa una coexpresión, esto nos puede hablar de expresión tardía y expresión temprana de genes, en donde los clusters que si presentan dicha coexpresión se expresan en diferentes momentos que los genes presentes en el cluster que no presenta coexpresión, sugiriendo que opera de manera completamente autónoma e independiente de los eventos transcripcionales del cluster principal.
+
+Los dos clusters interconectados representan procesos biológicos masivos y complejos (como la progresión del ciclo celular y la remodelación de la matriz extracelular). Que ambos bloques dependan de un puente de solo dos genes (los nodos amarillos centrales) clasifica a estos últimos como genes conectores críticos. En la dinámica tumoral, estos dos genes actúan como un único puente de paso de información; si estos reguladores potenciales se alteran, toda la comunicación coordinada entre los dos procesos celulares colapsa. Esto los convierte en candidatos ideales para terapias dirigidas, ya que atacar el "cuello de botella" es estratégicamente más efectivo que atacar genes individuales en la periferia.
+
 
 # Referencias 
 
