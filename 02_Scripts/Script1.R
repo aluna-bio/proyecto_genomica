@@ -108,5 +108,15 @@ tom_filtrada <- TOM
 tom_filtrada[tom_filtrada < 0.05] <- 0
 
 
+# Transformar datos para realizar la red compleja
+red_igraph_tom <- graph_from_adjacency_matrix(tom_filtrada, # transforma la matriz plana de números en un objeto matemático de red (para trabajar con nodos y enlaces)
+                                              mode = "undirected",  # los enlaces no tienen dirección (red no dirigida)
+                                              weighted = TRUE, # Guarda el valor numérico de la matriz exacto de la TOM (el peso de cada linea), en lugar de tratarlo como datos simples (si/no)
+                                              diag = FALSE) # ignora la diagonal de la matriz para evitar que los nodos se conecten consigo mismos
+
+# Detección de módulos (genes que se coexpresan juntos ya que participan en la misma via biológica)
+comunidades_tom <- cluster_louvain(red_igraph_tom) # agrupa los nodos altamente conectados entre si
+grupos_tom <- membership(comunidades_tom) # indica a que grupo pertenece cada nodo (permite clasificar)
+grupos_tom
 
 
