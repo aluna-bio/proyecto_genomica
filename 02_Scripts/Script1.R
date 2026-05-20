@@ -92,7 +92,21 @@ adjacency <- adjacency(datos_t, power = 4, type = "unsigned")
 # Compartir muchos vecinos -> solapamiento topologico alto (reduce el ruido de falsos positivos y hace que los clusters sean robustos y limpios)
 TOM <- TOMsimilarity(adjacency)
 
-# La matriz TOM perdioentonces le ponemos los nombres de los genes de la matriz de adyacencia
+# La matriz TOM perdio etiquetas entonces le ponemos los nombres de los genes de la matriz de adyacencia
 rownames(TOM) <- colnames(adjacency)
 colnames(TOM) <- colnames(adjacency)
+
+# Eliminar la diagonal
+# Cada gen tiene relación perfecta de 1 consigo mismo, para evitar bucles la eliminamos poniendole 0 en la diagonal
+diag(TOM) <- 0
+
+# Duplicamos la matriz TOM para filtrar
+tom_filtrada <- TOM
+
+# Filtramos la matriz para eliminar ruido de fondo, en un umbral 0.05 (arbitrario)
+# Todo lo que este por debajo de este umbral se le pondra un 0
+tom_filtrada[tom_filtrada < 0.05] <- 0
+
+
+
 
