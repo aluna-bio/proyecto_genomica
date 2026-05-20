@@ -116,7 +116,24 @@ red_igraph_tom <- graph_from_adjacency_matrix(tom_filtrada, # transforma la matr
 
 # Detección de módulos (genes que se coexpresan juntos ya que participan en la misma via biológica)
 comunidades_tom <- cluster_louvain(red_igraph_tom) # agrupa los nodos altamente conectados entre si
-grupos_tom <- membership(comunidades_tom) # indica a que grupo pertenece cada nodo (permite clasificar)
+grupos_tom <- membership(comunidades_tom) # indica a que grupo pertenece cada gen (permite clasificar)
 grupos_tom
+
+
+## Aislar aquellos genes con más conexiones
+grados <- degree(red_igraph_tom) # cuenta cuantas conexiones tiene cada gen
+grados
+
+# seleccionar 150 de los genes que esten más conectados (hubs)
+genes_hubs_tom <- names (sort(grados, decreasing = TRUE)[1:150]) # ordena los genes de mayor a menor según su número de conexiones. (names se queda únicamente con los nombres de los números)
+genes_hubs_tom
+
+# Hacer la red con esos 150 genes
+sub_red_tom <- subgraph(red_igraph_tom, genes_hubs_tom) # subgraph lo que hace es extraer un subconjunto de una red más grande
+# toma la red grande, busca esos 150 genes y elimina todo lo demás
+
+
+
+
 
 
