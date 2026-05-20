@@ -44,8 +44,7 @@ datos_t <- t(datos_filtrados)
 # Esta función busca el mejor power:
 pst <- pickSoftThreshold(datos_t, powerVector = (1:20), networkType = "unsigned") 
 
-# Plot 1
-# 
+# Plot 1: Ajuste de Topología:
 png(filename = "03_Results/01_Ajuste_Topologia.png",width = 800, height = 600, res = 120)
 plot(
   pst$fitIndices[,1],
