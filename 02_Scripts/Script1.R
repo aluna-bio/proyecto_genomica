@@ -79,7 +79,7 @@ dev.off()
 power <- pst$powerEstimate
 power
 
-# Se selecciona el power 4 porque 
+# Se selecciona el power 4 porque cumple los filtros que se requieren para su selección.
 
 # Calcular la matriz de adyacencia 
 # Calcula la correlación de Pearson entre los 5,000 genes a lo largo de todas las muestras y, después, eleva cada resultado a la potencia 4. 
@@ -133,6 +133,18 @@ sub_red_tom <- subgraph(red_igraph_tom, genes_hubs_tom) # subgraph lo que hace e
 # toma la red grande, busca esos 150 genes y elimina todo lo demás
 
 
+# Hacer el plot de esa red con los 150 genes y alojarlos en results
+png(filename = "03_Results/03_Red.png",width = 800, height = 600, res = 120)
+
+plot (sub_red_tom,
+      vertex.size = 5, # el tamaño de los nodos
+      vertex.color = grupos_tom[genes_hubs_tom], # define el color de cada nodo
+      vertex.label = NA, # Oculta los nombres de los genes (para que no se encimen)
+      edge.width = E(sub_red_tom)$weight * 1.5, # Controla el grosor de las lineas. Extrae el valor de la fuerza de conexión de la matriz TOM (va de 0 a 1). Al multiplicarlo por 1.5 las conexiones más fuertes se ven más gruesas.
+      edge.color = "grey80",  # Enlaces gris claro de fondo para estética limpia
+      layout = layout_with_fr,  # Sirve para visualizar redes. Agrupa los genes relacionados en modulos
+      main = "Red de Coexpresión basada en Matriz TOM (Top 150 Hubs)")
+dev.off()
 
 
 
