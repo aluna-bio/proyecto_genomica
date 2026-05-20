@@ -79,10 +79,20 @@ dev.off()
 power <- pst$powerEstimate
 power
 
-# Se selecciona el power 4 porque es el que dadas las dos pruebas para la verificación del uso del power cumplió los requerimientos.
+# Se selecciona el power 4 porque 
 
 # Calcular la matriz de adyacencia 
-# Esta permite calcular la correlación a partir de datos de expresión, se le agrega el power seleccionado para elevar los datos
-# Dado que no es una red de interacción se especifica que es sin signo. 
+# Calcula la correlación de Pearson entre los 5,000 genes a lo largo de todas las muestras y, después, eleva cada resultado a la potencia 4. 
+# Red no dirigida (no nos interesa el sentido, correlación negativa o positiva) -> sin signo -> toma el valor absoluto
+# Las correlaciones débiles se desvanecen hacia el cero y las fuertes (como 0.8 o 0.9) sobreviven.
 adjacency <- adjacency(datos_t, power = 4, type = "unsigned")
+
+# Matriz de traslape topologico
+# Filtro contra el ruido biologico -> Cuenta cuantos vecinos tienen en común, si comparten vecindario el enlace se vuelve más fuerte
+# Compartir muchos vecinos -> solapamiento topologico alto (reduce el ruido de falsos positivos y hace que los clusters sean robustos y limpios)
+TOM <- TOMsimilarity(adjacency)
+
+# La matriz TOM perdioentonces le ponemos los nombres de los genes de la matriz de adyacencia
+rownames(TOM) <- colnames(adjacency)
+colnames(TOM) <- colnames(adjacency)
 
